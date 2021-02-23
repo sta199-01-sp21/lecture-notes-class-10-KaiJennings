@@ -49,17 +49,22 @@ xtabs(~ Treatment + Improved, data = Arthritis) %>%
 ```
 
 - How many patients were enrolled in the clinical trial?
+84 patients enrolled in the clinical trial 
 
 - What is the probability a randomly selected patient received the placebo?
+43/84
 
 - What is the probability a randomly selected patient received the placebo
   and had a marked improvement?
+  7/84
   
 - What is the probability a randomly selected patient received the placebo
   and the treatment?
+  0
   
 - What is the probability a randomly selected patient had some improvement or
   was on the treatment?
+  
 
 ## Using computer simulations to calculate probabilities
 
@@ -75,7 +80,7 @@ marbles <- c("red", "red", "white", "red", "blue", "blue", "red", "blue")
 Suppose we draw a single marble from our imaginary box, where all the marbles
 are equally likely to be selected. What is the probability the marble is blue? 
 How about white?
-
+3/8 
 We can simulate this "drawing" with the `sample()` function.
 
 ```{r sample}
@@ -101,6 +106,7 @@ prop.table(counts)
 ```
 
 How close is this value to the "true" probability?
+gets closer and closer with the law of large numbers 
 
 **To summarize our process:**
 
@@ -154,18 +160,29 @@ the square of dice roll 1 is equal to dice roll 2; or the absolute value of the
 difference between dice roll 1 and dice roll 2 is equal to 4.
 
 Perform a simulation to compute this empirical probability.
-
+1st 
 Write down your guess to the answer before you calculate it.
 
 ```{r simulate_rolls}
+roll_results <- tibble(
+  die_1 = replicate(n=1000, expr = sample(1:6, size = 1)), 
+  die_2 = replicate(n=1000, expr = sample(1:6, size = 1))
+)
+roll_results
 
 ```
 
 ```{r identify_events}
-
+roll_results<-roll_results %>%
+  mutate(event_1= die_1 ^2 == die_2, 
+         event_2 = abs(die_1 - die_2)==4)
+roll_results
 ```
 
 ```{r summarize_rolls}
+roll_results %>%
+  summarise(event_1_prob = mean(event_1),
+            event_2_prob = mean(event_2))
 
 ```
 
