@@ -168,7 +168,7 @@ roll_results <- tibble(
   die_1 = replicate(n=1000, expr = sample(1:6, size = 1)), 
   die_2 = replicate(n=1000, expr = sample(1:6, size = 1))
 )
-roll_results
+roll_results 
 
 ```
 
