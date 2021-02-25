@@ -4,7 +4,7 @@ author: "Kai Jennings"
 date: "02/23/2021"
 output: html_document
 editor_options: 
-  chunk_output_type: console
+  chunk_output_type: console 
 ---
 
 ```{r global_options, include=FALSE}
